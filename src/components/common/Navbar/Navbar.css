@@ -1,0 +1,47 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #222;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar-menu {
+    display: flex;
+}
+
+.navbar-items {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-items li {
+    margin-left: 1rem;
+}
+
+.navbar-items a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar-items a:hover {
+    text-decoration: underline;
+}
+
+.active {
+    font-weight: bold;
+    color: #007bff;
+    /* You can use any color you prefer */
+}

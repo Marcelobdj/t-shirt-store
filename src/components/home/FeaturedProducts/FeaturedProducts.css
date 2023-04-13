@@ -1,0 +1,12 @@
+.featured-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.featured-products h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
