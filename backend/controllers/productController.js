@@ -22,20 +22,22 @@ const getProductDetails = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-    const { name, description, price, imageUrl } = req.body;
+    const { name, description, price, imageUrl, sizes, colors } = req.body;
 
     try {
-        const newProduct = new Product({
+        const product = new Product({
             name,
             description,
             price,
             imageUrl,
+            sizes,
+            colors,
         });
 
-        await newProduct.save();
-        res.status(201).json(newProduct);
+        await product.save();
+        res.status(201).json({ message: 'Product created', data: product });
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Error creating product', error });
     }
 };
 
