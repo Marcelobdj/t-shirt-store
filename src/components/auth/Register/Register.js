@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Register.css';
 
 const Register = () => {
@@ -15,8 +16,26 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // TODO: Connect to your backend API for registration
-        console.log('Register form data:', formData);
+
+        if (formData.password !== formData.passwordConfirm) {
+            // Handle password mismatch error
+            console.log('Passwords do not match');
+            return;
+        }
+
+        try {
+            const response = await axios.post('/api/users/register', {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+            });
+            // TODO: Store the returned user object in your application state or context
+            // Redirect user to the login page or directly log them in
+            console.log('Registration successful:', response.data);
+        } catch (error) {
+            // Handle registration error, e.g., show a message to the user
+            console.log('Registration error:', error.response.data);
+        }
     };
 
     return (

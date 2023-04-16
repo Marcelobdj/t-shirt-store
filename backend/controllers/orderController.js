@@ -1,19 +1,30 @@
-// This is just a starting point for orderController.js
-// You will need to implement additional functionality
-// such as creating an order
+const Order = require('../models/orderModel');
 
-const Order = require('../models/Order');
-
-const createOrder = async (req, res) => {
+// Create a new order
+exports.createOrder = async (req, res) => {
     try {
-        // Implement your order creation logic here
+        const { userId, items, shippingAddress, totalPrice } = req.body;
 
-        res.status(201).json({ message: 'Order created' });
+        const newOrder = new Order({
+            user: userId,
+            items,
+            shippingAddress,
+            totalPrice,
+        });
+
+        const savedOrder = await newOrder.save();
+        res.status(201).json(savedOrder);
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Error creating order', error });
     }
 };
 
-module.exports = {
-    createOrder,
+// Get orders by user
+exports.getOrdersByUser = async (req, res) => {
+    try {
+        const orders = await Order.find({ user: req.user._id });
+        res.status(200).json(orders);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching orders', error });
+    }
 };

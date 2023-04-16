@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Login.css';
 
 const Login = () => {
@@ -13,8 +14,19 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // TODO: Connect to your backend API for login
-        console.log('Login form data:', formData);
+
+        try {
+            const response = await axios.post('/api/users/login', {
+                email: formData.email,
+                password: formData.password,
+            });
+            // TODO: Store the returned user object and token in your application state or context
+            // Redirect user to the protected pages
+            console.log('Login successful:', response.data);
+        } catch (error) {
+            // Handle login error, e.g., show a message to the user
+            console.log('Login error:', error.response.data);
+        }
     };
 
     return (
